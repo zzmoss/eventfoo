@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-    (r'^$','views.index'),
+    (r'^$','login.views.index'),
+    (r'^register','login.views.register'),
     )

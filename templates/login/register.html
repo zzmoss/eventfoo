@@ -2,7 +2,7 @@
 
 {% block pagetitle %} Welcome {% endblock %}
 
-{% block title %} Login {% endblock %}
+{% block title %} Registration {% endblock %}
 
 {% block primary %}
 
@@ -12,11 +12,9 @@
 
 {% endif %}
 
-<form action = "." method = 'post'> {% csrf_token %}
+<form action = "" method = 'post'> {% csrf_token %}
     {{ form.as_p}}
     <input type="submit" value="Submit"/>
 </form>
-
-<a href="./register">Register</a>
 
 {% endblock %}                                                                       
