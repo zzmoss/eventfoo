@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title> {% block pagetitle %} {% endblock %} </title>
+    </head>
+
+    <body>
+    <div id="header"> Event Foo </div>
+    <div id="nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/login/">Login</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        <div id="primary">
+            <h1> {% block title %} {% endblock %} </h1>
+
+            {% block primary %} {% endblock %}
+        </div>
+    </div>
+    </body>
+</html>
