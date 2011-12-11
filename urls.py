@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'eventfoo.views.home', name='home'),
     url(r'^login/', include('eventfoo.login.urls')),
-
+    url(r'^badge/', include('eventfoo.badge.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

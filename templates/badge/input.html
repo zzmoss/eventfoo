@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block pagetitle %} Badge Creation {% endblock %}
+
+{% block title %} Enter details {% endblock %}
+
+{% block primary %}
+
+{% if error%}
+
+    {{ error }}
+
+{% endif %}
+
+<form action = "." method = 'post'> {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" value="Submit"/>
+</form>
+
+{% endblock %}                                                                       
