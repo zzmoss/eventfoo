@@ -27,7 +27,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
 from csvimport import CsvReader
-
+import copy
 #####################################################
 ######## User Defined Values ########################
 #####################################################
@@ -38,8 +38,9 @@ FOLD_COLOR = "#000000"
 
 
 class BadgeImage(object):
-    def __init__(self, filename, fontname):
-        self.img = Image.open(filename)
+    def __init__(self, templatefile, fontname):
+        templatefile.save('template.png')
+        self.img = Image.open('template.png')
         self.draw = ImageDraw.Draw(self.img)
         self.width = int(self.img.size[0]*0.9)
         self.fontname = fontname
@@ -100,7 +101,7 @@ class BadgeImage(object):
         newimg.paste(self.img, (0,0))
         newimg.paste(self.img, (self.img.size[0]+20,0))
         newimg.save(filename)
-
+        
 
 class DataFileReader(object):
     def __init__(self, fp):
@@ -136,8 +137,8 @@ import sys
 
 class BadgeMaker(object):
 
-    def __init__(self, fp, fontname = "Trebucbd.ttf", template = "badge_template_black.png", namecol = "white", compcol = "red", idcol = "white", foldcol = "black", filenames = ["sample"], nfs = 45, cfs = 26):
-        #self.filenames = filenames
+    def __init__(self, fp, template, fontname = "Trebucbd.ttf" , namecol = "white", compcol = "red", idcol = "white", foldcol = "black", dirname = "" , nfs = 45, cfs = 26):
+        self.dirname = "outputPNGs/"+dirname
         self.fp = fp
         self.fontname = fontname
         self.template = template
@@ -148,42 +149,19 @@ class BadgeMaker(object):
         self.namefontsize = nfs
         self.compfontsize = cfs
                    
-    # I know single line funcs suck but "I shouldn't ditch Java for atleast an year" :P
-
-    def setFont(self, name):
-        self.fontname = name
-
-    def setBgColor(self, col):
-        if col == "white":
-            self.template = "badge_template_white.png"
-        elif col == "black":
-            self.template = "badge_template_black.png"
-           
-    def setNameColor(self, col):
-        self.namecol = col
-
-    def setCompanyColor(self, col):
-        self.compcol = col
-
-    def setIdColor(self, col):
-        self.idcol = col
-
-    def setFoldColor(self, col):   
-        self.foldcol = col
-
     def generateBadges(self):
         self.count = 0
-        #for filename in self.filenames:
+       
         self.reader = DataFileReader(self.fp)
-        filename = "generatedones"
-        if not os.path.exists(filename):
-            os.makedirs(filename)
+        dirname = self.dirname
+        if not os.path.exists(dirname):
+            os.makedirs(dirname)
         for id, name, company in self.reader.getData():
             print id, name, company
             self.badge = BadgeImage(self.template, self.fontname)
             self.badge.drawPerson(name, self.namecol, self.namefontsize)
             self.badge.drawCompany(company, self.compcol, self.compfontsize)
             self.badge.drawId(id, self.idcol)
-            self.badge.save(os.path.join(filename, "badge_" + str(id) + ".png"), self.foldcol)
+            self.badge.save(os.path.join(dirname, "badge_" + str(id) + ".png"), self.foldcol)
             self.count += 1
         print "\n%d badges created" % (self.count)
