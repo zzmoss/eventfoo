@@ -37,8 +37,10 @@ def get_details(request):
             imageData = Image.open(uploadedImage)
             handle_uploaded_file(request.FILES['csvfile'], imageData, dirname, str(rand))
             filezip = open("outputZIPs/"+dirname+str(rand)+".zip")
-            return HttpResponse(filezip, mimetype = "application/x-zip-compressed")
-        
+            response = HttpResponse(filezip, mimetype = "application/x-zip-compressed")
+            value = 'attachment; filename=badges_'+str(rand)+'.zip'
+            response['Content-Disposition'] = value
+            return response
         else:
             error = 'Form invalid'
             return errorHandle(error)
