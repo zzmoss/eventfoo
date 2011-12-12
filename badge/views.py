@@ -18,7 +18,7 @@ def get_details(request):
         #for chunk in f.chunks():
         #    destination.write(chunk)
         #destination.close()
-        ob = createBadges.BadgeMaker(f,template = "BadgeGen/badge_template_white.png",namecol = "black", fontname = "BadgeGen/arial.ttf" )
+        ob = createBadges.BadgeMaker(f,template = "badge/BadgeGen/badge_template_white.png",namecol = "black", fontname = "badge/BadgeGen/Trebucbd.ttf" )
 
         ob.generateBadges()
 
@@ -28,11 +28,11 @@ def get_details(request):
         fname = request.POST['fname']
         handle_uploaded_file(request.FILES['csvfile'])
        
-        #if form.is_valid():
-        return render_to_response('badge/success.html', {'fname':fname})
-        #else:
-        #   error = 'Form invalid'
-        #   return errorHandle(error)
+        if form.is_valid():
+            return render_to_response('badge/success.html', {'fname':fname})
+        else:
+           error = 'Form invalid'
+           return errorHandle(error)
     else:
        form = BadgeForm()
        return render_to_response('badge/input.html', {'form':form,})
