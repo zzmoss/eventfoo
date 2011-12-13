@@ -1,9 +1,14 @@
 from django import forms
 
+#class ColorWidget(forms.TextInput):
+#    class Media:
+#        js = ('jscolor/jscolor.js')
+    
 class BadgeForm(forms.Form):
-    #fname = forms.CharField(max_length = 100)
-    #lname = forms.CharField(max_length = 100)
-    #desig = forms.CharField(max_length = 100)
     templatefile = forms.ImageField()
     csvfile = forms.FileField()
-    #passwored = forms.CharField(widget = forms.PasswordInput(render_value=False),max_length=100)
+    namefontcol = forms.CharField(max_length =100, widget=forms.TextInput(attrs={'class':'color'}))
+    compfontcol = forms.CharField(max_length =100, widget=forms.TextInput(attrs={'class':'color'}))
+
+    class Media:
+        js = ('jscolor/jscolor.js')

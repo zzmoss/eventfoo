@@ -1,56 +1,8 @@
 <html>
     <head>
         <title> {% block pagetitle %} {% endblock %} </title>
-        <style type="text/css">
-            
-            #header {
-            text-align : center;
-            font-size: 40px;
-            font-height: 7px;
-            font-weight: bold;
-            font-family: Helvetica, Courier;
-            color: red;
-            }
-
-#nav ul {
-text-align: center;
-list-style-type : none;
-margin: 30px;
-padding: 5px;
-font-size: 20px;
-text-transform: uppercase;
-}
-
-#nav li{
-text-align: center;
-padding: 10px;
-display: inline;
-}
-
-#nav a{
-display: inline;
-width : 10px;
-}
-
-#title{
-font-size:30;
-font-weight: bold;
-}
-
-#primary{
-text-align: center;
-font-size: 20;
-}
-
-input{
-    text-align:center;
-    }
-button{
-    font-size:20;
-}
-
-
-        </style>
+        <script type="text/javascript" src="{{STATIC_URL}}jscolor/jscolor.js"></script>
+        <link rel = "stylesheet" href="{{STATIC_URL}}awesomify.css" type="text/css" />
     </head>
 
     <body>
@@ -59,10 +11,13 @@ button{
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about/">About</a></li>
-            <li><a href="/login/">Login</a></li>
             <li><a href="/badge/">Badge</a></li>
+            {% if login %} <li><a href="/login/logout">Logout</a></li> 
+            {% else %} <li><a href="/login/">Login</a></li>
+            
+            {% endif %}
         </ul>
-    </div>
+    </div> 
     <div id="content">
         <div id="primary">
             <div id="title"> {% block title %} {% endblock %} </div>

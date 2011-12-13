@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
 {% block pagetitle %} Badge Creation {% endblock %}
 
 {% block title %} Enter details {% endblock %}
-
 {% block primary %}
 
 {% if error%}
@@ -11,6 +9,7 @@
     {{ error }}
 
 {% endif %}
+
 
 <form action = "." method = 'post' enctype = 'multipart/form-data'> {% csrf_token %}
     {{ form.as_p}}
